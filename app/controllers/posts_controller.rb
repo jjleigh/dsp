@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	before_filter :ensure_login, :only => [:edit, :update, :destroy]
 
 	def index
 		@posts = Post.all
@@ -44,7 +45,6 @@ class PostsController < ApplicationController
 	end
 
 	private
-
 	def post_params
 		params.require(:posts).permit(:title, :text, :image)
 	end
